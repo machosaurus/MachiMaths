@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../style/style.css" rel="stylesheet" media="screen" />
+        <script src="../js/index.js" type="text/javascript"></script> 
+        <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+        <title> Hi Machie this is menu</title>
+    </head>
+
+    <body>
+        <div class="gameWindow">
+            <div id="setView">
+                <p style="font-size: 23px; padding-top: 10px; "> Choose Your Modez</p>
+                <div class="row">
+                    <p style="font-size: 23px; padding-top: 10px; ">Digit </p>
+                    <button label ="n1" class="select">1</button><button label ="n1"class="select">2</button><button label ="n1" class="select">3</button><button label ="n1" class="select">4</button><button label ="n1"class="select">5</button>
+                </div>
+            
+                <div class="row">
+                    <p style="font-size: 23px; padding-top: 10px; ">Digit </p>
+                    <button label ="n2"class="select">1</button><button label ="n2"class="select">2</button><button label ="n2"class="select">3</button><button label ="n2"class="select">4</button><button label ="n2"class="select">5</button>
+                </div>
+                
+                <div class="row">
+                    <p style="font-size: 23px; padding-top: 10px; ">Operation </p>
+                    <button label ="op" class="select">➕</button><button label ="op" class="select">➖</button><button label ="op" class="select">✖️</button><button label ="op" class="select">➗</button><button label ="op" class="select">➰</button>
+                </div>
+                <a id="start" onclick="location.href='./index.html';">PLAY</a>           
+            </div>
+            <div class="popup" onclick= "popup()">🖲
+                    <span class="popuptext"id= "myPopup">
+                        <p style="margin: 0px 0px 5px 3px;"> Round per play</p>
+                        <button class ="rounds"label= "rnds">10</button>
+                        <button class ="rounds"label= "rnds">20</button>
+                        <button class ="rounds"label= "rnds">30</button>
+                        <button class ="rounds"label= "rnds">40</button>
+                        <button class ="rounds"label= "rnds">50</button>
+                    </span>
+            </div>
+
+           
+        </div>
+ 
+    </body>
+
+    <script>
+        var allSelect = document.getElementsByTagName("button");
+
+        for (var i = 0; i < allSelect.length; i++) {
+            const key = allSelect[i];
+            const id = allSelect[i].getAttribute("label");
+            key.addEventListener('click', function () {
+                selectionHandler(id ,key.innerHTML);
+            })
+
+        }
+
+    </script>
+
+</html>
