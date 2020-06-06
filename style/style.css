@@ -151,6 +151,7 @@ p{
     justify-content: center;
     overflow: hidden;
     font-size: 110px;
+    position: static;
     text-shadow: 1px 1px 5px rgb(86, 194, 200);
 }
 
