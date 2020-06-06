@@ -1,4 +1,4 @@
-//----------------index.js for SimpleMaths
+//----------------index.js for MachiMaths
 
     function keyDown(key){
         //console.log("Key Code: "+ key.keyCode);
@@ -94,7 +94,7 @@
         }
     }
 
-
+    //=====================MachiMaths, Tabaru 06/2020===================================//
 //=============================================================================================
 /*
 var range = {};
