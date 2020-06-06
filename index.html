@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <link href="style.css" rel="stylesheet" media="screen" />
+        <script src="index.js" type="text/javascript"></script> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0;" />
+        <title> Hi Machie u go girl</title>
+    </head>
+
+    <body>
+        <div class="gameWindow">
+            <div id="window">
+                    <a class="link" href="menu.html" style="font-size: 30px; padding-left: 10px; padding-top: 10px;">⬅</a>
+
+                <div id="problem"></div>
+                <div id="screen"></div>
+            </div>
+            <div id="pad" >
+                <div class="row2">
+                    <button class="key">7</button><button class="key">8</button><button class="key">9</button>
+                </div>
+                <div class="row2">
+                    <button class="key">4</button><button class="key">5</button><button class="key">6</button>
+                </div>
+                <div class="row2">
+                    <button class="key">1</button><button class="key">2</button><button class="key">3</button>
+                </div>
+                <div class="row2">
+                    <button class="key">◁</button><button class="key">0</button><button class="key">⏎</button>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        var allKeys = document.getElementsByTagName("button");
+        var screen = document.getElementById("screen");
+        var counter = 0;
+        var answer;
+        var local1;
+
+        //------------------------------------------------INITIATE KEYS
+        local1 = localStorage.max2;
+        for (var i = 0; i < allKeys.length; i++) {
+            const key = allKeys[i];
+            key.addEventListener('click', function () {
+                buttonHandler(key.innerHTML);
+            })
+        }
+
+        document.addEventListener('keydown', function(event){
+            keyDown(event);
+        } );
+   
+        generateProblem();
+
+        //--------------------------------------------------------GENERATE PROBLEM
+        var mode, maxA;
+
+        function generateProblem(){
+
+            if(counter == localStorage.getItem("rounds")){
+                counter = 0;
+                window.location.href = "./menu.html";
+            }
+
+            mode = localStorage.getItem("modeSelection");
+            if(mode == 'M'|| !mode){
+                generateMode();
+            }
+
+           let numbers = generateNumbers();
+           var d1 = numbers[0];
+           var d2 = numbers[1];
+        
+            if(mode == '/'){
+                var mod = d1 % d2;
+                console.log("mod: "+ mod);
+                if(mod != 0){
+                    d1 = generateDividend(d1,d2);
+                }
+            }
+
+            var problem = document.getElementById("problem");
+            problem.innerHTML = d1 + ' ' + mode + ' ' + d2 + ' =';
+            answer = eval(d1 + mode + d2);
+            console.log("counter: " + counter);
+            console.log("ANSWER: " + answer);
+        }
+
+        function generateNumbers(){
+            maxA = localStorage.getItem("max1");
+            maxB = localStorage.getItem("max2");
+            var minA = localStorage.getItem("min1");
+            var minB = localStorage.getItem("min2");
+
+            var x1 = Math.floor(Math.random()*(maxA - minA + 1))+ +minA; 
+            var x2 = Math.floor(Math.random()*(maxB - minB + 1))+ +minB;
+
+            if(x1 < x2){ 
+                var temp = x1;
+                x1 = x2;
+                x2 = temp;
+                maxA = maxB;
+            }
+
+            return [x1, x2];
+        }
+
+        //-----------------------------------gen new Dividend
+        function generateDividend(p1, p2){
+            console.log("old: " + p1 + "/" + p2);
+            var ans = Math.floor(p1/p2);
+            divs = ans* p2;
+            console.log("new div: " + divs);
+
+            if(divs.toString().length < maxA.length){
+                ans = Math.ceil(p1/p2);
+                divs = ans * p2;
+                console.log("new div II: " + divs);
+            }
+
+            return divs;
+        }
+
+        //--------------------------------------generate mode
+        function generateMode(){
+            var n = Math.floor(Math.random()*10);
+
+            switch(n){
+                case(3):
+                case(1): mode = "+";
+                    break;
+                case(2):
+                case(0): mode = "-";
+                    break;
+                case(4):
+                case(7): mode = "*";
+                    break;
+                case(6):
+                case(8): mode = "/";
+                    break;
+                default:
+                    console.log("regenerating");
+                    generateMode();
+            }                
+        }
+
+        //-------------------------------------------------------REFRESH
+        function refresh(){
+            counter++;
+            screen.innerHTML = "";
+            //var value = "";
+            generateProblem();            
+        }
+
+    </script>
+
+
+</html>
