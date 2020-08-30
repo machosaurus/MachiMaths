@@ -4,7 +4,7 @@
         //console.log("Key Code: "+ key.keyCode);
         if(47 < key.keyCode && key.keyCode < 58){ //numbers
             buttonHandler(key.key);
-        }else if(key.keyCode == 46){
+        }else if(key.keyCode == 46 || key.keyCode == 8){ //delete
             buttonHandler('◁');
         }else if(key.keyCode == 13){
             buttonHandler('⏎');
